@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/chanxuehong/wechat/mp/core"
+	"github.com/wudaoluo/wechat/mp/core"
 )
 
 const (

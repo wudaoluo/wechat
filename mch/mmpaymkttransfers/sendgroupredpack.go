@@ -1,7 +1,7 @@
 package mmpaymkttransfers
 
 import (
-	"github.com/chanxuehong/wechat/mch/core"
+	"github.com/wudaoluo/wechat/mch/core"
 )
 
 // 发放裂变红包.

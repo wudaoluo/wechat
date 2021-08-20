@@ -3,7 +3,7 @@ package poi
 import (
 	"fmt"
 
-	"github.com/chanxuehong/wechat/mp/core"
+	"github.com/wudaoluo/wechat/mp/core"
 )
 
 type ListResult struct {
