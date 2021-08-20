@@ -25,11 +25,19 @@ type SessionInfo struct {
 	City     string `json:"city"`     // 普通用户个人资料填写的城市
 	Province string `json:"province"` // 用户个人资料填写的省份
 	Country  string `json:"country"`  // 国家, 如中国为CN
-
+	PhoneNumber     string    `json:"phoneNumber"`
+	PurePhoneNumber string    `json:"purePhoneNumber"`
+	CountryCode     string    `json:"countryCode"`
+	WaterMark       WaterMark `json:"watermark"`
 	// 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），
 	// 用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。
 	AvatarUrl string `json:"avatarUrl"`
 	UnionId   string `json:"unionId"` // 只有在将小程序绑定到微信开放平台帐号后，才会出现该字段。
+}
+
+type WaterMark struct {
+	AppID     string `json:"appid"`
+	Timestamp int64  `json:"timestamp"`
 }
 
 // GetSession 获取小程序会话
