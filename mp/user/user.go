@@ -1,8 +1,13 @@
 package user
 
 import (
+	"fmt"
+	"github.com/wudaoluo/wechat/oauth2"
+	"github.com/wudaoluo/wechat/util"
+	"net/http"
 	"net/url"
 
+	"github.com/wudaoluo/wechat/internal/debug/api"
 	"github.com/wudaoluo/wechat/mp/core"
 )
 
@@ -71,6 +76,50 @@ func Get(clt *core.Client, openId string, lang string) (info *UserInfo, err erro
 	info = &result.UserInfo
 	return
 }
+
+func GetByAccessToken(accessToken string, openId string, lang string,httpClient *http.Client) (info *UserInfo, err error) {
+	switch lang {
+	case "":
+		lang = LanguageZhCN
+	case LanguageZhCN, LanguageZhTW, LanguageEN:
+	default:
+		lang = LanguageZhCN
+	}
+
+	if httpClient == nil {
+		httpClient = util.DefaultHttpClient
+	}
+
+	var _url = "https://api.weixin.qq.com/cgi-bin/user/info?openid=" + url.QueryEscape(openId) +
+		"&lang=" + lang + "&access_token="
+	api.DebugPrintGetRequest(_url)
+	httpResp, err := httpClient.Get(_url)
+	if err != nil {
+		return
+	}
+	defer httpResp.Body.Close()
+
+	if httpResp.StatusCode != http.StatusOK {
+		err = fmt.Errorf("http.Status: %s", httpResp.Status)
+		return
+	}
+
+	var result struct {
+		oauth2.Error
+		UserInfo
+	}
+	if err = api.DecodeJSONHttpResponse(httpResp.Body, &result); err != nil {
+		return
+	}
+	if result.ErrCode != oauth2.ErrCodeOK {
+		err = &result.Error
+		return
+	}
+
+	info = &result.UserInfo
+	return
+}
+
 
 type batchGetRequestItem struct {
 	OpenId   string `json:"openid"`
