@@ -91,7 +91,7 @@ func GetByAccessToken(accessToken string, openId string, lang string,httpClient 
 	}
 
 	var _url = "https://api.weixin.qq.com/cgi-bin/user/info?openid=" + url.QueryEscape(openId) +
-		"&lang=" + lang + "&access_token="
+		"&lang=" + lang + "&access_token=" + accessToken
 	api.DebugPrintGetRequest(_url)
 	httpResp, err := httpClient.Get(_url)
 	if err != nil {
