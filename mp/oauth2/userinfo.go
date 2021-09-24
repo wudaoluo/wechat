@@ -36,7 +36,7 @@ type UserInfo struct {
 
 	Privilege []string `json:"privilege,omitempty"` // 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）
 	UnionId   string   `json:"unionid,omitempty"`   // 只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。
-	RedirectURL string `json:"redirect_url"`  //特殊字段。专门为白名单失效
+	Redirect  bool `json:"redirect"`  //特殊字段。专门为白名单失效 true 跳转
 
 }
 
