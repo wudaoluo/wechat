@@ -35,6 +35,7 @@ type SessionInfo struct {
 	UnionId   string `json:"unionId"` // 只有在将小程序绑定到微信开放平台帐号后，才会出现该字段。
 	OpenID     string `json:"openid"`
 	UnionID    string `json:"unionid"`
+	Data interface{}
 }
 
 type WaterMark struct {
@@ -110,6 +111,7 @@ func GetSessionInfo(EncryptedData, sessionKey, iv string) (info *SessionInfo, er
 
 	raw, err := util2.AESDecryptData(cipherText, aesKey, aesIv)
 
+
 	if err != nil {
 		return
 	}
@@ -117,5 +119,6 @@ func GetSessionInfo(EncryptedData, sessionKey, iv string) (info *SessionInfo, er
 	if err = json.Unmarshal(raw, &info); err != nil {
 		return
 	}
+	info.Data = raw
 	return
 }
