@@ -116,6 +116,5 @@ func GetSessionInfo(EncryptedData, sessionKey, iv string) (info *SessionInfo, er
 	if err = json.Unmarshal(raw, &info); err != nil {
 		return
 	}
-	info.Data = raw
 	return
 }
