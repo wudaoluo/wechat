@@ -33,9 +33,6 @@ type SessionInfo struct {
 	// 用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。
 	AvatarUrl string `json:"avatarUrl"`
 	UnionId   string `json:"unionId"` // 只有在将小程序绑定到微信开放平台帐号后，才会出现该字段。
-	OpenID     string `json:"openid"`
-	UnionID    string `json:"unionid"`
-	Data interface{}
 }
 
 type WaterMark struct {
