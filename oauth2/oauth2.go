@@ -19,7 +19,7 @@ type Token struct {
 	CreatedAt    int64  `json:"created_at"`              // access_token 创建时间, unixtime, 分布式系统要求时间同步, 建议使用 NTP
 	ExpiresIn    int64  `json:"expires_in"`              // access_token 接口调用凭证超时时间, 单位: 秒
 	RefreshToken string `json:"refresh_token,omitempty"` // 刷新 access_token 的凭证
-        IsSnapshotuser string `json:"is_snapshotuser"` //是否为快照页模式虚拟账号，只有当用户是快照页模式虚拟账号时返回，值为1
+        IsSnapshotuser int `json:"is_snapshotuser"` //是否为快照页模式虚拟账号，只有当用户是快照页模式虚拟账号时返回，值为1
 	OpenId  string `json:"openid,omitempty"`
 	UnionId string `json:"unionid,omitempty"`
 	Scope   string `json:"scope,omitempty"` // 用户授权的作用域, 使用逗号(,)分隔
